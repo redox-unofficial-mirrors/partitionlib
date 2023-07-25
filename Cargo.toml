@@ -6,6 +6,6 @@ edition = "2018"
 license = "MIT"
 
 [dependencies]
-gpt = { git = "https://gitlab.redox-os.org/redox-os/gpt" }
+gpt = { version = "3.0.1" }
 scroll = { version = "0.10", features = ["derive"] }
-uuid = { version = "~0.7", features = ["v4"] }
+uuid = { version = "1.0", features = ["v4"] }
