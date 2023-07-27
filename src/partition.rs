@@ -53,7 +53,10 @@ fn get_gpt_partitions<D: Read + Seek>(
     device: &mut D,
     sector_size: LogicalBlockSize,
 ) -> Result<PartitionTable> {
-    let header = gpt::header::read_header_from_arbitrary_device(device, sector_size)?;
+    let header = match gpt::header::read_header_from_arbitrary_device(device, sector_size) {
+        Ok(res) => res,
+        Err(err) => return Err(err),
+    };
     Ok(PartitionTable {
         partitions: gpt::partition::file_read_partitions(device, &header, sector_size).map(
             |btree| {
